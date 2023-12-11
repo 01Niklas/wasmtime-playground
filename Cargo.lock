@@ -497,6 +497,9 @@ dependencies = [
 [[package]]
 name = "example-plugin"
 version = "0.1.0"
+dependencies = [
+ "runtime",
+]
 
 [[package]]
 name = "fallible-iterator"
@@ -1687,7 +1690,10 @@ dependencies = [
 name = "wasmtime-playground"
 version = "0.1.0"
 dependencies = [
+ "anyhow",
+ "byteorder",
  "runtime",
+ "wasmtime",
 ]
 
 [[package]]

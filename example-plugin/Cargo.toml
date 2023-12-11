@@ -7,3 +7,4 @@ edition = "2021"
 crate-type = ["cdylib"]
 
 [dependencies]
+runtime = { path = "../runtime", default-features = false, features = ["api"] }
