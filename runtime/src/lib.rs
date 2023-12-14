@@ -1,4 +1,3 @@
-use wasmtime::{Instance, Memory, MemoryType};
 use crate::api::PluginParams;
 
 #[cfg(feature = "api")]
@@ -21,17 +20,18 @@ pub fn start(module_file: &str) -> anyhow::Result<()> {
 
     let module = wasmtime::Module::from_file(&engine, module_file)?;
 
-    linker.module(&mut store, "", &module)?;
+    let instance = linker.instantiate(&mut store, &module)?;
+
     let start_fn = linker
         .get(&mut store, "", "start")
         .unwrap()
         .into_func()
         .unwrap()
         .typed::<i64, i32>(&store)?;
-    
-    // let memory = Memory::new(&mut store, MemoryType::new64(1,None)).unwrap();
 
-    // let start_fn = instance.get_typed_func::<i64, i32>(&mut store, "start").unwrap();
+    let memory = instance.get_memory(&mut store, "memory").ok_or(anyhow::anyhow!("Memory not found"))?;
+
+    memory.write(&mut store, 0, &[0,0,0,42,0,0,0,73]).unwrap();
 
     let params = Box::new(PluginParams {
         lhs: 42,
