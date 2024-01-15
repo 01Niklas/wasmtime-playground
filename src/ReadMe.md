@@ -11,7 +11,10 @@
 - Link to the `WebAssembly Binary Toolkit`: https://github.com/WebAssembly/wabt
   - Transforming wasm to wat: https://manpages.ubuntu.com/manpages/focal/man1/wasm2wat.1.html
 - Example for using `Web Assembly`: https://surma.dev/things/rust-to-webassembly/
+- Using `Memory`in wasm: https://radu-matei.com/blog/practical-guide-to-wasm-memory/
 
 ## Problems: 
 - How to deal with memory? 
-  - how can we access parameters inside plugin?
+  - how can we access complex parameters inside plugin?
+  - wasm only supports primitive datatypes
+  - how to deal with pointers/ can we access memory via pointer?
